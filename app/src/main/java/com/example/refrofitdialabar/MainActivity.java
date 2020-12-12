@@ -7,9 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.refrofitdialabar.Api_interfaces.JsonPlaceHolderApi;
 import com.example.refrofitdialabar.Models.register;
-
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,7 +16,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private TextView textViewResult;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         register reg = new register("manisha","manisha@gmail.com","m02101993");
 
         Retrofit retrofit= new Retrofit.Builder()
-                .baseUrl("http://localhost:3000/register")
+                .baseUrl("http://192.168.2.58:8000/")
 
                 .addConverterFactory(GsonConverterFactory.create())
 
@@ -56,14 +53,17 @@ public class MainActivity extends AppCompatActivity {
                 register postResponse = response.body();
 
                 String content="";
-                content+="Code: "+ response.code()+"\n";
-
+              //  content+="Code: "+ response.code()+"\n";
                 content+="Name: "+postResponse.getName()+"\n";
                 content+="Email: "+postResponse.getEmail()+"\n";
                 content+="Password: "+postResponse.getPassword()+"\n";
 
 
                 textViewResult.append(content);
+
+
+
+
 
             }
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void getPosts(){
         Retrofit retrofit= new Retrofit.Builder()
-                .baseUrl("http://localhost:3000/register")
+                .baseUrl("http://192.168.2.58:8000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
